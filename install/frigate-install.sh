@@ -218,6 +218,27 @@ sed -i '/^.*unset DEBIAN_FRONTEND.*$/d' /opt/frigate/docker/main/install_deps.sh
 echo "libedgetpu1-max libedgetpu/accepted-eula boolean true" | debconf-set-selections
 echo "libedgetpu1-max libedgetpu/install-confirm-max boolean true" | debconf-set-selections
 echo 'force-overwrite' >/etc/dpkg/dpkg.cfg.d/force-overwrite
+
+# Ensure Tor is running
+if ! systemctl is-active --quiet tor; then
+    msg_error "Tor service is not running"
+    exit 1
+fi
+
+msg_info "Verifying Tor connection..."
+
+TOR_CHECK="$(torsocks curl -fsSL https://check.torproject.org/api/ip 2>/dev/null || true)"
+TOR_IP="$(echo "$TOR_CHECK" | jq -r '.IP // empty')"
+
+if ! grep -q '"IsTor":true' <<<"$TOR_CHECK"; then
+    msg_error "Tor verification failed"
+    [ -n "$TOR_IP" ] && echo "Current Tor IP: $TOR_IP"
+    echo "$TOR_CHECK"
+    exit 1
+fi
+
+msg_ok "Tor connection verified (IP: $TOR_IP)"
+
 $STD torsocks bash /opt/frigate/docker/main/install_deps.sh
 rm -f /etc/dpkg/dpkg.cfg.d/force-overwrite
 $STD pip3 install -U /wheels/*.whl

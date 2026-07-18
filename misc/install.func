@@ -555,8 +555,8 @@ SocksPort 9050
 DataDirectory /var/lib/tor
 User debian-tor
 ExitNodes {us},{gb},{ie},{nl},{de},{se},{ch}
-ExcludeNodes {cn},{ru},{ir},{kp},{by}
-ExcludeExitNodes {cn},{ru},{ir},{kp},{by}
+ExcludeNodes {cn},{ru},{ua},{ir},{kp},{by}
+ExcludeExitNodes {cn},{ru},{ua},{ir},{kp},{by}
 StrictNodes 0
 Log notice file /var/log/tor/tor.log
 EOF
