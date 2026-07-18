@@ -7,14 +7,6 @@
 
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
 color
-
-if [ -z "${TORSOCKS_WRAPPED:-}" ]; then
-  install_tor
-  export TORSOCKS_WRAPPED=1
-  SELF_SCRIPT="$(curl -fsSL .../install/frigate-install.sh)"
-  exec torsocks bash -c "$SELF_SCRIPT"
-fi
-
 verb_ip6
 catch_errors
 setting_up_container
@@ -226,7 +218,7 @@ sed -i '/^.*unset DEBIAN_FRONTEND.*$/d' /opt/frigate/docker/main/install_deps.sh
 echo "libedgetpu1-max libedgetpu/accepted-eula boolean true" | debconf-set-selections
 echo "libedgetpu1-max libedgetpu/install-confirm-max boolean true" | debconf-set-selections
 echo 'force-overwrite' >/etc/dpkg/dpkg.cfg.d/force-overwrite
-$STD bash /opt/frigate/docker/main/install_deps.sh
+$STD torsocks bash /opt/frigate/docker/main/install_deps.sh
 rm -f /etc/dpkg/dpkg.cfg.d/force-overwrite
 $STD pip3 install -U /wheels/*.whl
 ldconfig
