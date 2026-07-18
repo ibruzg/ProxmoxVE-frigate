@@ -19,7 +19,7 @@ APP="CrowdSec"
 hostname="$(hostname)"
 
 # Telemetry
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/api.func) 2>/dev/null || true
+source <(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/api.func) 2>/dev/null || true
 declare -f init_tool_telemetry &>/dev/null && init_tool_telemetry "crowdsec" "addon"
 
 set -o errexit

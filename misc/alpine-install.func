@@ -6,8 +6,8 @@
 if ! command -v curl >/dev/null 2>&1; then
   apk update && apk add curl >/dev/null 2>&1
 fi
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/core.func)
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/error_handler.func)
+source <(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/core.func)
+source <(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/error_handler.func)
 load_functions
 catch_errors
 
@@ -165,7 +165,7 @@ EOF
     fi
   fi
   local tools_content
-  tools_content=$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/tools.func) || {
+  tools_content=$(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/tools.func) || {
     msg_error "Failed to download tools.func"
     exit 115
   }
@@ -244,7 +244,7 @@ EOF
     msg_ok "Customized Container"
   fi
 
-  echo 'set -a; [ -f /etc/profile.d/90-http-proxy.sh ] && . /etc/profile.d/90-http-proxy.sh; set +a; bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/ct/'"${app}"'.sh)"' >/usr/bin/update
+  echo 'set -a; [ -f /etc/profile.d/90-http-proxy.sh ] && . /etc/profile.d/90-http-proxy.sh; set +a; bash -c "$(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/ct/'"${app}"'.sh)"' >/usr/bin/update
   chmod +x /usr/bin/update
   post_progress_to_api
 }

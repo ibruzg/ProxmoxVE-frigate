@@ -10,10 +10,10 @@ if ! command -v curl &>/dev/null; then
   apt-get update >/dev/null 2>&1
   apt-get install -y curl >/dev/null 2>&1
 fi
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/core.func)
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/tools.func)
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/error_handler.func)
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/api.func) 2>/dev/null || true
+source <(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/core.func)
+source <(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/tools.func)
+source <(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/error_handler.func)
+source <(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/api.func) 2>/dev/null || true
 declare -f init_tool_telemetry &>/dev/null && init_tool_telemetry "copyparty" "addon"
 
 # Enable error handling
@@ -289,7 +289,7 @@ SERVICEEOF
   cat <<'UPDATEEOF' >/usr/local/bin/update_copyparty
 #!/usr/bin/env bash
 # CopyParty Update Script
-type=update bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/tools/addon/copyparty.sh)"
+type=update bash -c "$(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/tools/addon/copyparty.sh)"
 UPDATEEOF
   chmod +x /usr/local/bin/update_copyparty
   msg_ok "Created update script (/usr/local/bin/update_copyparty)"

@@ -12,6 +12,7 @@ catch_errors
 setting_up_container
 network_check
 update_os
+install_tor
 
 source /etc/os-release
 if [[ "$VERSION_ID" != "12" ]]; then

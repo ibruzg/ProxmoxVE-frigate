@@ -5,10 +5,10 @@
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/hansmi/prometheus-paperless-exporter
 
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/core.func)
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/tools.func)
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/error_handler.func)
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/api.func) 2>/dev/null || true
+source <(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/core.func)
+source <(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/tools.func)
+source <(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/error_handler.func)
+source <(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/misc/api.func) 2>/dev/null || true
 declare -f init_tool_telemetry &>/dev/null && init_tool_telemetry "prometheus-paperless-ngx-exporter" "addon"
 
 # Enable error handling
@@ -120,7 +120,7 @@ EOF
   cat <<'UPDATEEOF' >/usr/local/bin/update_prometheus-paperless-ngx-exporter
 #!/usr/bin/env bash
 # prometheus-paperless-ngx-exporter Update Script
-type=update bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/tools/addon/prometheus-paperless-ngx-exporter.sh)"
+type=update bash -c "$(curl -fsSL https://raw.githubusercontent.com/ibruzg/ProxmoxVE-frigate/main/tools/addon/prometheus-paperless-ngx-exporter.sh)"
 UPDATEEOF
   chmod +x /usr/local/bin/update_prometheus-paperless-ngx-exporter
   msg_ok "Created update script (/usr/local/bin/update_prometheus-paperless-ngx-exporter)"
